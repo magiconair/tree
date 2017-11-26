@@ -15,10 +15,11 @@ with tests and benchmarks.
 	- [ ] delete
 	- [x] find
 	- [ ] find min/max
-	- [ ] BFS, DFS traversal
-	- [ ] prefix, postfix and infix rendering
-	- [ ] tests
-	- [ ] benchmarks
+	- [ ] DFS traversal
+	- [x] pre/in/post-order rendering
+	- [ ] BFS traversal
+	- [x] tests
+	- [x] benchmarks
 
 - [ ] B-Tree
 - [ ] AVL tree
