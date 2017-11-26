@@ -9,26 +9,26 @@ with tests and benchmarks.
 
 ### Tree Data Structures
 
-[o] Binary search tree
-	[x] insert
-	[ ] delete
-	[x] find
-	[ ] find min/max
-	[ ] BFS, DFS traversal
-	[ ] prefix, postfix and infix rendering
-	[ ] tests
-	[ ] benchmarks
+- [o] Binary search tree
+	- [x] insert
+	- [ ] delete
+	- [x] find
+	- [ ] find min/max
+	- [ ] BFS, DFS traversal
+	- [ ] prefix, postfix and infix rendering
+	- [ ] tests
+	- [ ] benchmarks
 
-[ ] B-Tree
-[ ] AVL tree
-[ ] Trie/Prefix tree
-[ ] Radix tree
-[ ] Merkle tree
-[ ] Red-Black tree (if I'm crazy enough)
+- [ ] B-Tree
+- [ ] AVL tree
+- [ ] Trie/Prefix tree
+- [ ] Radix tree
+- [ ] Merkle tree
+- [ ] Red-Black tree (if I'm crazy enough)
 
 ### Algorithms
 
-[ ] A*
-[ ] Dijkstra
+- [ ] A*
+- [ ] Dijkstra
 
 Frank
