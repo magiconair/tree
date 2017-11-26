@@ -5,13 +5,23 @@ package binary
 // The values need to provide a comparator which implements the sort order.
 //
 // The implementation uses empty nodes for terminating branches instead of null
-// pointers. This simplifies the traversal algorithms at the expense of two
+// pointers. This simplifies the traversal algorithms at the expense of
 // additional recursions. For small trees and high concurrency this may be
 // relevant but since this implementation focuses on readability this can be
 // optimized later if necessary.
 type Tree struct {
 	v       Value
 	l, r, p *Tree
+}
+
+// Creates a new tree from the given values.
+// Use pre-order to recreate a saved tree.
+func NewTree(values ...Value) *Tree {
+	t := &Tree{}
+	for _, v := range Values {
+		t.Add(v)
+	}
+	return t
 }
 
 // Add adds a value if it does not exist already. It returns true if the value
@@ -61,6 +71,42 @@ func (t *Tree) Contains(v Value) bool {
 	default: // t.v > v
 		return t.r.Contains(v)
 	}
+}
+
+// PreOrder returns the values in pre-order (node, left, right).
+func (t *Tree) PreOrder() []Value {
+	if t.empty() {
+		return nil
+	}
+	var x []Value
+	x = append(x, t.v)
+	x = append(x, t.l.PreOrder()...)
+	x = append(x, t.r.PreOrder()...)
+	return x
+}
+
+// InOrder returns the values in in-order (left, node, right).
+func (t *Tree) InOrder() []Value {
+	if t.empty() {
+		return nil
+	}
+	var x []Value
+	x = append(x, t.l.InOrder()...)
+	x = append(x, t.v)
+	x = append(x, t.r.InOrder()...)
+	return x
+}
+
+// PostOrder returns the values in post-order (left, right, node).
+func (t *Tree) PostOrder() []Value {
+	if t.empty() {
+		return nil
+	}
+	var x []Value
+	x = append(x, t.l.PostOrder()...)
+	x = append(x, t.r.PostOrder()...)
+	x = append(x, t.v)
+	return x
 }
 
 // Len returns the number of elements in the tree.
