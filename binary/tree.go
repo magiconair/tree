@@ -30,12 +30,12 @@ func (t *Tree) Add(v Value) bool {
 	}
 
 	switch x := t.v.Compare(v); {
+	case x == 0:
+		return false // duplicate
 	case x < 0:
 		return t.l.Add(v)
-	case x > 0:
-		return t.r.Add(v)
 	default:
-		return false
+		return t.r.Add(v)
 	}
 }
 
@@ -54,12 +54,12 @@ func (t *Tree) Contains(v Value) bool {
 		return false
 	}
 	switch x := t.v.Compare(v); {
+	case x == 0:
+		return true
 	case x < 0:
 		return t.l.Contains(v)
-	case x > 0:
-		return t.r.Contains(v)
 	default:
-		return true
+		return t.r.Contains(v)
 	}
 }
 
