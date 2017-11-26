@@ -9,7 +9,7 @@ with tests and benchmarks.
 
 ### Tree Data Structures
 
-- [o] Binary search tree
+- [ ] Binary search tree
 	- [x] insert
 	- [ ] delete
 	- [x] find
