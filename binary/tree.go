@@ -18,7 +18,7 @@ type Tree struct {
 // Use pre-order to recreate a saved tree.
 func NewTree(values ...Value) *Tree {
 	t := &Tree{}
-	for _, v := range Values {
+	for _, v := range values {
 		t.Add(v)
 	}
 	return t
