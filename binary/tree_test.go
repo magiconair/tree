@@ -108,6 +108,11 @@ func TestTree(t *testing.T) {
 	}
 }
 
+// goos: darwin
+// goarch: amd64
+// pkg: github.com/magiconair/tree/binary
+// BenchmarkAdd/map-8         	10000000	       115 ns/op
+// BenchmarkAdd/Tree-8        	 1000000	      2086 ns/op
 func BenchmarkAdd(b *testing.B) {
 	const n = 1000000
 	vals := randomStrings(n, 8)
@@ -126,10 +131,16 @@ func BenchmarkAdd(b *testing.B) {
 	})
 }
 
+// keep something outside the benchmark to prevent compiler optimizations
 var found int
 
+// goos: darwin
+// goarch: amd64
+// pkg: github.com/magiconair/tree/binary
+// BenchmarkFind/map-8        	50000000	        32.7 ns/op
+// BenchmarkFind/Tree-8       	 3000000	       487 ns/op
 func BenchmarkFind(b *testing.B) {
-	const n = 1000000
+	const n = 10000
 	vals := randomStrings(n, 8)
 	b.Run("map", func(b *testing.B) {
 		m := map[string]bool{}
@@ -137,8 +148,8 @@ func BenchmarkFind(b *testing.B) {
 			m[vals[i%n]] = true
 		}
 		b.ResetTimer()
-		for i := 0; i < n; i++ {
-			if _, ok := m[vals[i]]; ok {
+		for i := 0; i < b.N; i++ {
+			if _, ok := m[vals[i%n]]; ok {
 				found++
 			}
 		}
@@ -146,11 +157,11 @@ func BenchmarkFind(b *testing.B) {
 	b.Run("Tree", func(b *testing.B) {
 		m := &Tree{}
 		for i := 0; i < n; i++ {
-			m.Add(StringValue(vals[i%n]))
+			m.Add(StringValue(vals[i]))
 		}
 		b.ResetTimer()
-		for i := 0; i < n; i++ {
-			v := StringValue(vals[i])
+		for i := 0; i < b.N; i++ {
+			v := StringValue(vals[i%n])
 			if m.Contains(v) {
 				found++
 			}
