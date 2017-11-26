@@ -7,13 +7,6 @@ import (
 )
 
 func TestTree(t *testing.T) {
-	stringValues := func(vals ...string) []StringValue {
-		var x []StringValue
-		for _, v := range vals {
-			x = append(x, StringValue(v))
-		}
-		return x
-	}
 	values := func(vals ...string) []Value {
 		var x []Value
 		for _, v := range vals {
@@ -24,7 +17,7 @@ func TestTree(t *testing.T) {
 
 	tests := []struct {
 		desc          string
-		values        []StringValue
+		values        []Value
 		pre, in, post []Value
 		len           int
 		depth         int
@@ -36,7 +29,7 @@ func TestTree(t *testing.T) {
 		},
 		{
 			desc:   "one node",
-			values: stringValues("a"),
+			values: values("a"),
 			pre:    values("a"),
 			in:     values("a"),
 			post:   values("a"),
@@ -48,7 +41,7 @@ func TestTree(t *testing.T) {
 			//    / \
 			//   a   c
 			desc:   "balanced",
-			values: stringValues("b", "a", "c"),
+			values: values("b", "a", "c"),
 			pre:    values("b", "a", "c"),
 			in:     values("a", "b", "c"),
 			post:   values("a", "c", "b"),
@@ -62,7 +55,7 @@ func TestTree(t *testing.T) {
 			//  /
 			// a
 			desc:   "left-leaning",
-			values: []StringValue{"c", "b", "a"},
+			values: values("c", "b", "a"),
 			pre:    values("c", "b", "a"),
 			in:     values("a", "b", "c"),
 			post:   values("a", "b", "c"),
@@ -76,7 +69,7 @@ func TestTree(t *testing.T) {
 			//        \
 			//         c
 			desc:   "right-leaning",
-			values: []StringValue{"a", "b", "c"},
+			values: values("a", "b", "c"),
 			pre:    values("a", "b", "c"),
 			in:     values("a", "b", "c"),
 			post:   values("c", "b", "a"),
